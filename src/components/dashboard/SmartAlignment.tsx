@@ -3,10 +3,8 @@ import { ArrowRight } from 'lucide-react';
 
 export const SmartAlignment = () => (
     <div className="bg-[#0A0A0B] rounded-[32px] p-8 text-white relative overflow-hidden h-full flex flex-col justify-center shadow-2xl">
-        {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
             style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-
         <div className="relative z-10">
             <header className="flex justify-between items-center mb-10">
                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Smart Alignment</span>
@@ -15,11 +13,8 @@ export const SmartAlignment = () => (
                     <div className="w-1 h-1 rounded-full bg-white/20" />
                 </div>
             </header>
-
             <h4 className="text-xl font-semibold mb-6 tracking-tight leading-snug">What is your main<br />focus today?</h4>
-
             <div className="relative flex items-center group">
-                {/* Refined Input with Inner Shadow for "recessed" feel */}
                 <input
                     type="text"
                     placeholder="Type your goal..."
