@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const text = response.text();
 
         res.status(200).json({ text });
-    } catch (error) {
+    } catch {
         res.status(500).json({ error: "AI Processing Failed" });
     }
 }

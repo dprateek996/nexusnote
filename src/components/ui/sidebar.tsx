@@ -4,14 +4,11 @@ import React, {
   createContext,
   useState,
   useContext,
-  useRef,
-  useEffect,
 } from "react";
 import {
   IconArrowLeft,
 } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface SidebarContextProps {
@@ -169,8 +166,7 @@ export const SidebarLink = ({
     icon: React.ReactNode;
   };
   className?: string;
-  props?: any;
-}) => {
+} & Omit<React.ComponentProps<typeof Link>, 'href'>) => {
   const { open, animate } = useSidebar();
   return (
     <Link

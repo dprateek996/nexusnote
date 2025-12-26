@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { Sidebar as AceternitySidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
-  IconArrowLeft,
-  IconBrandTabler,
   IconSettings,
   IconUserBolt,
   IconNote,
@@ -12,7 +10,6 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 export function Sidebar() {
   const links = [

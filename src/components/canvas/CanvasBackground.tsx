@@ -27,10 +27,12 @@ const CanvasBackground = () => {
 
     class Blob {
       x: number; y: number; vx: number; vy: number; radius: number; color: string;
-      
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+      private canvasRef: HTMLCanvasElement;
+
+      constructor(canvasEl: HTMLCanvasElement) {
+        this.canvasRef = canvasEl;
+        this.x = Math.random() * canvasEl.width;
+        this.y = Math.random() * canvasEl.height;
         this.vx = (Math.random() - 0.5) * 0.5;
         this.vy = (Math.random() - 0.5) * 0.5;
         this.radius = 150 + Math.random() * 150;
@@ -38,8 +40,8 @@ const CanvasBackground = () => {
       }
 
       update() {
-        const tetherX = canvas.width / 2;
-        const tetherY = canvas.height / 2;
+        const tetherX = this.canvasRef.width / 2;
+        const tetherY = this.canvasRef.height / 2;
         this.vx += (tetherX - this.x) * 0.0005;
         this.vy += (tetherY - this.y) * 0.0005;
 
@@ -57,27 +59,27 @@ const CanvasBackground = () => {
         this.x += this.vx;
         this.y += this.vy;
       }
-      
-      draw() {
-        ctx.beginPath();
-        const gradient = ctx.createRadialGradient(this.x, this.y, this.radius * 0.7, this.x, this.y, this.radius);
+
+      draw(context: CanvasRenderingContext2D) {
+        context.beginPath();
+        const gradient = context.createRadialGradient(this.x, this.y, this.radius * 0.7, this.x, this.y, this.radius);
         gradient.addColorStop(0, this.color);
         gradient.addColorStop(1, 'rgba(254, 240, 238, 0)');
-        ctx.fillStyle = gradient;
-        ctx.filter = 'blur(100px)';
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.filter = 'none';
+        context.fillStyle = gradient;
+        context.filter = 'blur(100px)';
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        context.fill();
+        context.filter = 'none';
       }
     }
 
-    const blobs = Array.from({ length: 4 }, () => new Blob());
+    const blobs = Array.from({ length: 4 }, () => new Blob(canvas));
     let animationFrameId: number;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       blobs.forEach(blob => {
         blob.update();
-        blob.draw();
+        blob.draw(ctx);
       });
       animationFrameId = requestAnimationFrame(animate);
     };
