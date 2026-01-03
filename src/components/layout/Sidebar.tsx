@@ -17,35 +17,35 @@ export function Sidebar() {
       label: "Dashboard",
       href: "/dashboard",
       icon: (
-        <IconLayoutDashboard className="text-slate-500 h-5 w-5 flex-shrink-0 group-hover/sidebar:text-rose-500" />
+        <IconLayoutDashboard className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
       ),
     },
     {
       label: "All Notes",
       href: "/notes",
       icon: (
-        <IconNote className="text-slate-500 h-5 w-5 flex-shrink-0 group-hover/sidebar:text-rose-500" />
+        <IconNote className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
       ),
     },
     {
       label: "Expenses",
       href: "/expenses",
       icon: (
-        <IconChartPie className="text-slate-500 h-5 w-5 flex-shrink-0 group-hover/sidebar:text-rose-500" />
+        <IconChartPie className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
       ),
     },
     {
       label: "Profile",
       href: "/profile",
       icon: (
-        <IconUserBolt className="text-slate-500 h-5 w-5 flex-shrink-0 group-hover/sidebar:text-rose-500" />
+        <IconUserBolt className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
       ),
     },
     {
       label: "Settings",
       href: "/settings",
       icon: (
-        <IconSettings className="text-slate-500 h-5 w-5 flex-shrink-0 group-hover/sidebar:text-rose-500" />
+        <IconSettings className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
       ),
     },
   ];
@@ -54,12 +54,12 @@ export function Sidebar() {
 
   return (
     <AceternitySidebar open={open} setOpen={setOpen} animate={true}>
-      <SidebarBody className="justify-between gap-10 bg-white border-r border-slate-100 shadow-sm">
+      <SidebarBody className="justify-between bg-white border-r border-slate-100" style={{ gap: 'var(--spacing-xl)', boxShadow: 'var(--shadow-sm)' }}>
         <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
           {open ? <Logo /> : <LogoIcon />}
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="flex flex-col" style={{ marginTop: 'var(--spacing-xl)', gap: 'var(--spacing-sm)' }}>
             {links.map((link, idx) => (
-              <SidebarLink key={idx} link={link} className="hover:bg-rose-50/50 rounded-xl transition-colors" />
+              <SidebarLink key={idx} link={link} className="hover:bg-rose-50/50 transition-colors" style={{ borderRadius: 'var(--radius-lg)' }} />
             ))}
           </div>
         </div>
@@ -69,7 +69,7 @@ export function Sidebar() {
               label: "Prateek Dwivedi",
               href: "#",
               icon: (
-                <div className="h-7 w-7 flex-shrink-0 rounded-full bg-rose-500 overflow-hidden border-2 border-white shadow-sm" />
+                <div className="flex-shrink-0 rounded-full bg-rose-500 overflow-hidden border-2 border-white" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', boxShadow: 'var(--shadow-sm)' }} />
               ),
             }}
           />
@@ -83,9 +83,10 @@ export const Logo = () => {
   return (
     <Link
       href="/dashboard"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+      className="font-normal flex items-center text-sm text-black py-1 relative"
+      style={{ gap: 'var(--spacing-sm)', zIndex: 'var(--z-sticky)' }}
     >
-      <div className="h-6 w-6 bg-rose-500 rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+      <div className="bg-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', borderRadius: 'var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-xs)' }} />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -101,9 +102,10 @@ export const LogoIcon = () => {
   return (
     <Link
       href="/dashboard"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+      className="font-normal flex items-center text-sm text-black py-1 relative"
+      style={{ gap: 'var(--spacing-sm)', zIndex: 'var(--z-sticky)' }}
     >
-      <div className="h-6 w-6 bg-rose-500 rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+      <div className="bg-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', borderRadius: 'var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-xs)' }} />
     </Link>
   );
 };

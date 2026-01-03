@@ -8,18 +8,21 @@ import { StudyLab } from '@/components/dashboard/StudyLab';
 
 const Canvas = ({ children }: { children: React.ReactNode }) => (
     <div
-        className="col-span-12 lg:col-span-8 bg-white rounded-[40px] p-10 border border-slate-100 shadow-sm min-h-[700px] relative overflow-hidden"
+        className="col-span-12 lg:col-span-8 bg-white border border-slate-100 min-h-[700px] relative overflow-hidden"
         style={{
+            borderRadius: 'var(--radius-2xl)',
+            padding: 'var(--spacing-2xl)',
+            boxShadow: 'var(--shadow-sm)',
             backgroundImage: `radial-gradient(#E2E8F0 1.5px, transparent 1.5px)`,
             backgroundSize: '32px 32px'
         }}
     >
-        <div className="flex items-center gap-2 mb-10 relative z-10">
-            <span className="relative flex h-2 w-2">
+        <div className="flex items-center mb-10 relative" style={{ gap: 'var(--spacing-sm)', zIndex: 'var(--z-base)' }}>
+            <span className="relative flex" style={{ height: 'var(--spacing-sm)', width: 'var(--spacing-sm)' }}>
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="relative inline-flex rounded-full bg-green-500" style={{ height: 'var(--spacing-sm)', width: 'var(--spacing-sm)' }}></span>
             </span>
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Live Canvas</h2>
+            <h2 className="uppercase text-slate-400" style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-bold)', letterSpacing: '0.2em' }}>Live Canvas</h2>
         </div>
         {children}
     </div>
@@ -28,29 +31,30 @@ const Canvas = ({ children }: { children: React.ReactNode }) => (
 const Dashboard = () => {
     return (
         <MainLayout>
-            <div className="min-h-screen bg-[#F8F9FA] p-6 lg:p-10 font-sans text-slate-900 selection:bg-[#EAB3B1] selection:text-white">
-                <header className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
-                    <div className="flex items-center gap-2 text-sm self-start md:self-auto uppercase">
-                        <span className="text-slate-400 font-semibold text-[10px] tracking-widest">NEXUS</span>
+            <div className="min-h-screen bg-[#F8F9FA] font-sans text-slate-900 selection:bg-[#EAB3B1] selection:text-white" style={{ padding: 'var(--spacing-lg) var(--spacing-xl)' }}>
+                <header className="flex flex-col md:flex-row justify-between items-center" style={{ marginBottom: 'var(--spacing-xl)', gap: 'var(--spacing-lg)' }}>
+                    <div className="flex items-center self-start md:self-auto uppercase" style={{ gap: 'var(--spacing-sm)', fontSize: 'var(--font-size-sm)' }}>
+                        <span className="text-slate-400 tracking-widest" style={{ fontWeight: 'var(--font-weight-semibold)', fontSize: 'var(--font-size-xs)' }}>NEXUS</span>
                         <span className="text-slate-300">/</span>
-                        <span className="font-bold text-slate-800 text-[10px] tracking-widest">DASHBOARD</span>
+                        <span className="text-slate-800 tracking-widest" style={{ fontWeight: 'var(--font-weight-bold)', fontSize: 'var(--font-size-xs)' }}>DASHBOARD</span>
                     </div>
-                    <div className="flex gap-4 items-center w-full md:w-auto">
+                    <div className="flex items-center w-full md:w-auto" style={{ gap: 'var(--spacing-md)' }}>
                         <div className="relative flex items-center w-full md:w-64">
-                            <Search size={16} strokeWidth={2.5} className="absolute left-4 text-slate-400" />
+                            <Search size={16} strokeWidth={2.5} className="absolute text-slate-400" style={{ left: 'var(--spacing-md)' }} />
                             <input
                                 type="text"
                                 placeholder="Search notes..."
-                                className="w-full bg-slate-50 border border-slate-100 rounded-full py-2.5 pl-11 pr-4 text-sm text-slate-600 placeholder:text-slate-400 focus:outline-none focus:border-[#EAB3B1]/50 focus:bg-white transition-all"
+                                className="w-full bg-slate-50 border border-slate-100 text-slate-600 placeholder:text-slate-400 focus:outline-none focus:border-[#EAB3B1]/50 focus:bg-white transition-all"
+                                style={{ borderRadius: 'var(--radius-full)', padding: 'var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 2.75rem', fontSize: 'var(--font-size-sm)' }}
                             />
                         </div>
-                        <div className="h-6 w-px bg-slate-200 mx-2 hidden md:block"></div>
-                        <button className="bg-[#EAB3B1] text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-lg shadow-[#EAB3B1]/30 hover:bg-[#d9a09e] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex-shrink-0 ring-offset-2 focus:ring-2 ring-[#EAB3B1]">
+                        <div className="bg-slate-200 hidden md:block" style={{ height: 'var(--size-sm)', width: '1px', margin: '0 var(--spacing-sm)' }}></div>
+                        <button className="bg-[#EAB3B1] text-white uppercase tracking-widest hover:bg-[#d9a09e] hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 ring-offset-2 focus:ring-2 ring-[#EAB3B1]" style={{ padding: 'var(--spacing-sm) var(--spacing-lg)', borderRadius: 'var(--radius-full)', fontWeight: 'var(--font-weight-bold)', fontSize: 'var(--font-size-xs)', boxShadow: 'var(--shadow-lg)', transition: 'all var(--transition-slow) var(--ease-out-expo)' }}>
                             + New Note
                         </button>
                     </div>
                 </header>
-                <div className="grid grid-cols-12 gap-8 max-w-[1600px] mx-auto">
+                <div className="grid grid-cols-12 max-w-[1600px] mx-auto" style={{ gap: 'var(--spacing-xl)' }}>
                     <Canvas>
                         <div className="relative h-full w-full min-h-[550px]">
                             <Link href="/note/1" passHref className="block">
@@ -88,7 +92,7 @@ const Dashboard = () => {
                             </Link>
                         </div>
                     </Canvas>
-                    <div className="col-span-12 lg:col-span-4 flex flex-col gap-6">
+                    <div className="col-span-12 lg:col-span-4 flex flex-col" style={{ gap: 'var(--spacing-lg)' }}>
                         <StudyLab />
                         <div className="flex-1 min-h-[300px]">
                             <SmartAlignment />

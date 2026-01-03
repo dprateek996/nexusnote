@@ -20,30 +20,61 @@ export const StickyNote = ({
     date = "Dec 23, 2025",
     rotation = "rotate-[-1deg]"
 }: StickyNoteProps) => (
-    <div className={`
-    group relative bg-white border-[0.5px] border-[#F5E1E0] p-6 rounded-[24px] 
-    ${rotation} hover:rotate-0 hover:-translate-y-2 
-    shadow-[0_2px_4px_rgba(0,0,0,0.02),0_10px_20px_rgba(0,0,0,0.04),0_20px_40px_rgba(234,179,177,0.1)] 
-    hover:shadow-[0_30px_60px_-15px_rgba(234,179,177,0.3)] 
-    transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]
-    cursor-grab active:cursor-grabbing w-full h-full flex flex-col
-  `}>
+    <div
+        className={`
+            group relative bg-white border-[0.5px] border-[#F5E1E0] 
+            ${rotation} hover:rotate-0 hover:-translate-y-2 
+            transition-all cursor-grab active:cursor-grabbing w-full h-full flex flex-col
+        `}
+        style={{
+            padding: 'var(--spacing-lg)',
+            borderRadius: 'var(--radius-2xl)',
+            boxShadow: 'var(--shadow-md), 0 20px 40px rgba(234,179,177,0.1)',
+            transition: `all var(--transition-slower) var(--ease-out-back)`,
+        }}
+        onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = '0 30px 60px -15px rgba(234,179,177,0.3)';
+        }}
+        onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = 'var(--shadow-md), 0 20px 40px rgba(234,179,177,0.1)';
+        }}
+    >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-50" />
-        <div className="flex justify-between items-start mb-4">
-            <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${color.bg} ${color.text}`}>
+        <div className="flex justify-between items-start" style={{ marginBottom: 'var(--spacing-md)' }}>
+            <span
+                className={`uppercase tracking-wider ${color.bg} ${color.text}`}
+                style={{
+                    padding: 'var(--spacing-xs) var(--spacing-sm)',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: 'var(--font-size-xs)',
+                    fontWeight: 'var(--font-weight-bold)',
+                }}
+            >
                 {category}
             </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-slate-200 group-hover:bg-[#EAB3B1] transition-colors" />
+            <div className="rounded-full bg-slate-200 group-hover:bg-[#EAB3B1] transition-colors" style={{ height: '6px', width: '6px' }} />
         </div>
-        <h3 className="text-lg font-bold text-slate-800 tracking-tight leading-tight mb-2 group-hover:text-slate-900 transition-colors">
+        <h3
+            className="text-slate-800 tracking-tight leading-tight group-hover:text-slate-900 transition-colors"
+            style={{ fontSize: 'var(--font-size-lg)', fontWeight: 'var(--font-weight-bold)', marginBottom: 'var(--spacing-sm)' }}
+        >
             {title}
         </h3>
-        <p className="text-sm text-slate-500 leading-relaxed flex-grow font-medium">
+        <p
+            className="text-slate-500 leading-relaxed flex-grow"
+            style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)' }}
+        >
             {content}
         </p>
-        <div className="mt-6 pt-4 border-t border-slate-50 flex justify-between items-center text-[11px] text-slate-400 font-medium tracking-wide">
+        <div
+            className="border-t border-slate-50 flex justify-between items-center text-slate-400 tracking-wide"
+            style={{ marginTop: 'var(--spacing-lg)', paddingTop: 'var(--spacing-md)', fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-medium)' }}
+        >
             <span>{date}</span>
-            <button className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-600 hover:text-[#EAB3B1] uppercase text-[10px] font-bold tracking-wider">
+            <button
+                className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-600 hover:text-[#EAB3B1] uppercase tracking-wider"
+                style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-bold)' }}
+            >
                 Edit
             </button>
         </div>
