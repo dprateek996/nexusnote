@@ -74,7 +74,7 @@ const Dashboard = () => {
 
     return (
         <MainLayout>
-            <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900" style={{ padding: 'var(--spacing-xl)' }}>
+            <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 noise-bg" style={{ padding: 'var(--spacing-xl)' }}>
                 {/* Header */}
                 <header className="max-w-[1400px] mx-auto" style={{ marginBottom: 'var(--spacing-2xl)' }}>
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center" style={{ gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-xl)' }}>

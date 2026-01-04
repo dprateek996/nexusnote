@@ -20,58 +20,57 @@ export const StickyNote = ({
     date = "Dec 23, 2025",
     rotation = ""
 }: StickyNoteProps) => (
-    <div
-        className="group relative bg-white border border-slate-200 hover:border-slate-300 transition-all cursor-pointer w-full h-full flex flex-col hover:-translate-y-1"
-        style={{
-            padding: 'var(--spacing-lg)',
-            borderRadius: 'var(--radius-lg)',
-            boxShadow: 'var(--shadow-sm)',
-            transition: `all var(--transition-base) var(--ease-out-expo)`,
-        }}
-        onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-        }}
-        onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-        }}
-    >
+    <div className="group premium-card cursor-pointer w-full h-full flex flex-col" style={{ padding: 'var(--spacing-lg)', borderRadius: 'var(--radius-xl)' }}>
         <div className="flex justify-between items-start" style={{ marginBottom: 'var(--spacing-md)' }}>
             <span
-                className={`uppercase tracking-wider ${color.bg} ${color.text}`}
+                className={`uppercase tracking-tighter ${color.text} bg-opacity-10 ${color.bg}`}
                 style={{
                     padding: 'var(--spacing-xs) var(--spacing-sm)',
                     borderRadius: 'var(--radius-sm)',
                     fontSize: 'var(--font-size-xs)',
-                    fontWeight: 'var(--font-weight-semibold)',
+                    fontWeight: 'var(--font-weight-bold)',
                 }}
             >
                 {category}
             </span>
-            <div className="rounded-full bg-slate-200 group-hover:bg-slate-400 transition-colors" style={{ height: '6px', width: '6px' }} />
+            <div
+                className="rounded-full bg-slate-200 group-hover:bg-[rgb(var(--primary-rgb))] transition-colors"
+                style={{ width: '6px', height: '6px' }}
+            />
         </div>
+
         <h3
-            className="text-slate-900 tracking-tight leading-tight transition-colors"
-            style={{ fontSize: 'var(--font-size-lg)', fontWeight: 'var(--font-weight-bold)', marginBottom: 'var(--spacing-sm)' }}
+            className="text-slate-900"
+            style={{
+                fontSize: 'var(--font-size-lg)',
+                fontWeight: 'var(--font-weight-semibold)',
+                lineHeight: 'var(--line-height-tight)',
+                marginBottom: 'var(--spacing-sm)'
+            }}
         >
             {title}
         </h3>
+
         <p
-            className="text-slate-600 leading-relaxed flex-grow"
-            style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-normal)' }}
+            className="text-slate-500 leading-relaxed flex-grow line-clamp-4"
+            style={{ fontSize: 'var(--font-size-sm)' }}
         >
             {content}
         </p>
+
         <div
-            className="border-t border-slate-100 flex justify-between items-center text-slate-400 tracking-wide"
-            style={{ marginTop: 'var(--spacing-lg)', paddingTop: 'var(--spacing-md)', fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-medium)' }}
+            className="border-t border-slate-50 flex justify-between items-center"
+            style={{ marginTop: 'var(--spacing-lg)', paddingTop: 'var(--spacing-md)' }}
         >
-            <span>{date}</span>
-            <button
-                className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-600 hover:text-slate-900 uppercase tracking-wider"
-                style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-semibold)' }}
+            <span className="text-slate-400" style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-medium)' }}>
+                {date}
+            </span>
+            <span
+                className="text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-bold)' }}
             >
-                Open
-            </button>
+                EDIT →
+            </span>
         </div>
     </div>
 );

@@ -240,6 +240,37 @@
 
 @layer components {
 
+  /* Premium Noise Overlay - Adds tactile texture to prevent flat appearance */
+  .noise-bg::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.03;
+    z-index: 9999;
+    pointer-events: none;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  }
+
+  /* Sophisticated Premium Card - Double border effect for depth */
+  .premium-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.01),
+      var(--shadow-sm);
+    transition: all var(--transition-base) var(--ease-out-expo);
+  }
+
+  .premium-card:hover {
+    box-shadow:
+      0 0 0 1px rgba(var(--primary-rgb), 0.1),
+      var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
   /* Glassmorphism Card */
   .glass-card {
     background: var(--glass-bg);
