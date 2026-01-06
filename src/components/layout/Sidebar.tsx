@@ -1,112 +1,178 @@
 "use client";
-import React, { useState } from "react";
-import { Sidebar as AceternitySidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
+
+import React from "react";
 import {
-  IconSettings,
-  IconUserBolt,
-  IconNote,
+  Sidebar as SidebarComponent,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarSeparator,
+  useSidebar,
+} from "@/components/ui/sidebar";
+import {
   IconLayoutDashboard,
+  IconNote,
   IconChartPie,
+  IconUserBolt,
+  IconSettings,
+  IconSparkles,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
-export function Sidebar() {
-  const links = [
+export function AppSidebar() {
+  const pathname = usePathname();
+  const { open, isMobile } = useSidebar();
+
+  const mainNavigation = [
     {
       label: "Dashboard",
       href: "/dashboard",
-      icon: (
-        <IconLayoutDashboard className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
-      ),
+      icon: <IconLayoutDashboard className="h-5 w-5" />,
     },
     {
       label: "All Notes",
       href: "/notes",
-      icon: (
-        <IconNote className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
-      ),
+      icon: <IconNote className="h-5 w-5" />,
     },
     {
       label: "Expenses",
       href: "/expenses",
-      icon: (
-        <IconChartPie className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
-      ),
+      icon: <IconChartPie className="h-5 w-5" />,
     },
+  ];
+
+  const secondaryNavigation = [
     {
       label: "Profile",
       href: "/profile",
-      icon: (
-        <IconUserBolt className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
-      ),
+      icon: <IconUserBolt className="h-5 w-5" />,
     },
     {
       label: "Settings",
       href: "/settings",
-      icon: (
-        <IconSettings className="text-slate-500 group-hover/sidebar:text-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)' }} />
-      ),
+      icon: <IconSettings className="h-5 w-5" />,
     },
   ];
 
-  const [open, setOpen] = useState(false);
-
   return (
-    <AceternitySidebar open={open} setOpen={setOpen} animate={true}>
-      <SidebarBody className="justify-between bg-white border-r border-slate-100" style={{ gap: 'var(--spacing-xl)', boxShadow: 'var(--shadow-sm)' }}>
-        <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-          {open ? <Logo /> : <LogoIcon />}
-          <div className="flex flex-col" style={{ marginTop: 'var(--spacing-xl)', gap: 'var(--spacing-sm)' }}>
-            {links.map((link, idx) => (
-              <SidebarLink key={idx} link={link} className="hover:bg-rose-50/50 transition-colors" style={{ borderRadius: 'var(--radius-lg)' }} />
+    <SidebarComponent collapsible="icon">
+      <SidebarHeader>
+        <Logo />
+      </SidebarHeader>
+
+      <SidebarContent>
+        {/* Main Navigation */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarMenu>
+            {mainNavigation.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  href={item.href}
+                  icon={item.icon}
+                  isActive={pathname === item.href}
+                >
+                  {item.label}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             ))}
-          </div>
-        </div>
-        <div>
-          <SidebarLink
-            link={{
-              label: "Prateek Dwivedi",
-              href: "#",
-              icon: (
-                <div className="flex-shrink-0 rounded-full bg-rose-500 overflow-hidden border-2 border-white" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', boxShadow: 'var(--shadow-sm)' }} />
-              ),
-            }}
-          />
-        </div>
-      </SidebarBody>
-    </AceternitySidebar>
+          </SidebarMenu>
+        </SidebarGroup>
+
+        <SidebarSeparator />
+
+        {/* Secondary Navigation */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Account</SidebarGroupLabel>
+          <SidebarMenu>
+            {secondaryNavigation.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  href={item.href}
+                  icon={item.icon}
+                  isActive={pathname === item.href}
+                >
+                  {item.label}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+
+      <SidebarFooter>
+        <UserProfile />
+      </SidebarFooter>
+    </SidebarComponent>
   );
 }
 
-export const Logo = () => {
+function Logo() {
+  const { open, isMobile } = useSidebar();
+  const shouldShowText = open || isMobile;
+
   return (
     <Link
       href="/dashboard"
-      className="font-normal flex items-center text-sm text-black py-1 relative"
-      style={{ gap: 'var(--spacing-sm)', zIndex: 'var(--z-sticky)' }}
+      className="flex items-center gap-3 py-1 group"
     >
-      <div className="bg-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', borderRadius: 'var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-xs)' }} />
+      <div className="relative flex-shrink-0">
+        <div
+          className="bg-gradient-to-br from-rose-500 to-rose-600 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:shadow-rose-200"
+          style={{
+            height: "2rem",
+            width: "2rem",
+            borderRadius: "0.5rem 0.125rem 0.5rem 0.125rem",
+          }}
+        />
+        <IconSparkles className="absolute inset-0 m-auto h-4 w-4 text-white" />
+      </div>
       <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium text-black text-lg whitespace-pre"
+        animate={{
+          opacity: shouldShowText ? 1 : 0,
+          width: shouldShowText ? "auto" : 0,
+        }}
+        className="overflow-hidden whitespace-nowrap text-lg font-semibold text-slate-900"
       >
         NexusNote
       </motion.span>
     </Link>
   );
-};
+}
 
-export const LogoIcon = () => {
+function UserProfile() {
+  const { open, isMobile } = useSidebar();
+  const shouldShowDetails = open || isMobile;
+
   return (
-    <Link
-      href="/dashboard"
-      className="font-normal flex items-center text-sm text-black py-1 relative"
-      style={{ gap: 'var(--spacing-sm)', zIndex: 'var(--z-sticky)' }}
-    >
-      <div className="bg-rose-500 flex-shrink-0" style={{ height: 'var(--size-sm)', width: 'var(--size-sm)', borderRadius: 'var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-xs)' }} />
-    </Link>
+    <div className="flex items-center gap-3 rounded-lg p-2 hover:bg-slate-50 transition-colors">
+      <div
+        className="flex-shrink-0 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 border-2 border-white shadow-sm"
+        style={{ height: "2rem", width: "2rem" }}
+      />
+      <motion.div
+        animate={{
+          opacity: shouldShowDetails ? 1 : 0,
+          width: shouldShowDetails ? "auto" : 0,
+        }}
+        className="flex-1 overflow-hidden"
+      >
+        <div className="text-sm font-medium text-slate-900 truncate">
+          Prateek Dwivedi
+        </div>
+        <div className="text-xs text-slate-500 truncate">
+          prateek@nexusnote.com
+        </div>
+      </motion.div>
+    </div>
   );
-};
-export default Sidebar;
+}
+
+export default AppSidebar;
