@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CanvasBackground from '@/components/canvas/CanvasBackground';
+import GridBackground from '@/components/background/GridBackground';
 import Head from 'next/head';
 
 export default function LoginPage() {
@@ -18,6 +19,7 @@ export default function LoginPage() {
       </Head>
 
       <main className="relative min-h-screen w-full overflow-hidden bg-[rgb(var(--login-background-rgb))] text-[rgb(var(--login-foreground-rgb))] selection:bg-rose-200 selection:text-rose-900">
+        <GridBackground className="z-0" />
         <CanvasBackground />
 
         <div className="relative z-10 grid min-h-screen grid-cols-1 md:grid-cols-2">
@@ -44,7 +46,7 @@ export default function LoginPage() {
                 </span>
               </div>
 
-              <h1 className="font-display text-7xl font-light tracking-tight text-slate-900 lg:text-8xl">
+              <h1 className="text-7xl font-light tracking-tight text-slate-900 lg:text-8xl" style={{ fontFamily: 'var(--font-display)' }}>
                 Nexus<span className="font-semibold text-rose-500">Note</span>
               </h1>
 
