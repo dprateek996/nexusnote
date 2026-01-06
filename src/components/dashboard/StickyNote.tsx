@@ -13,22 +13,25 @@ type StickyNoteProps = {
     size?: 'small' | 'medium' | 'large';
 };
 
-// Typography sizes based on card size
+// Typography sizes based on card size - using Geist Mono for technical precision
 const typographyMap = {
     small: {
-        title: 'var(--font-size-base)',
-        content: 'var(--font-size-xs)',
-        lineClamp: 'line-clamp-3'
+        title: '14px',
+        titleWeight: '600',
+        content: '12px',
+        lineClamp: 'line-clamp-2'
     },
     medium: {
-        title: 'var(--font-size-lg)',
-        content: 'var(--font-size-sm)',
-        lineClamp: 'line-clamp-4'
+        title: '18px',
+        titleWeight: '600',
+        content: '14px',
+        lineClamp: 'line-clamp-3'
     },
     large: {
-        title: 'var(--font-size-2xl)',
-        content: 'var(--font-size-base)',
-        lineClamp: 'line-clamp-6'
+        title: '24px',
+        titleWeight: '600',
+        content: '16px',
+        lineClamp: 'line-clamp-5'
     },
 };
 
@@ -44,57 +47,82 @@ export const StickyNote = ({
     const typography = typographyMap[size];
 
     return (
-        <div className="group premium-card cursor-pointer w-full h-full flex flex-col" style={{ padding: 'var(--spacing-lg)', borderRadius: 'var(--radius-xl)' }}>
-            <div className="flex justify-between items-start" style={{ marginBottom: 'var(--spacing-md)' }}>
+        <div
+            className="group w-full h-full flex flex-col bg-white border border-[#E5E5E5] cursor-pointer overflow-hidden transition-all duration-300"
+            style={{
+                padding: '24px',
+                borderRadius: '20px',
+                boxShadow: '0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08)',
+                transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(25, 28, 33, 0.08)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08)';
+            }}
+        >
+            {/* Tag/Category Pill */}
+            <div className="flex justify-between items-start mb-3">
                 <span
-                    className={`uppercase tracking-tighter ${color.text} bg-opacity-10 ${color.bg}`}
+                    className={`${color.text} ${color.bg} font-mono text-xs font-medium transition-all duration-200`}
                     style={{
-                        padding: 'var(--spacing-xs) var(--spacing-sm)',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: 'var(--font-size-xs)',
-                        fontWeight: 'var(--font-weight-bold)',
+                        padding: '0 12px',
+                        height: '24px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        borderRadius: '9999px',
+                        textTransform: 'lowercase',
+                        border: `1px solid`,
+                        borderColor: 'currentColor',
+                        opacity: 0.7,
                     }}
                 >
-                    {category}
+                    {category.toLowerCase()}
                 </span>
-                <div
-                    className="rounded-full bg-slate-200 group-hover:bg-[rgb(var(--primary-rgb))] transition-colors"
-                    style={{ width: '6px', height: '6px' }}
-                />
             </div>
 
+            {/* Title - Geist Mono with tight tracking */}
             <h3
-                className="text-slate-900"
+                className="font-mono mb-2"
                 style={{
                     fontSize: typography.title,
-                    fontWeight: 'var(--font-weight-semibold)',
-                    lineHeight: 'var(--line-height-tight)',
-                    marginBottom: 'var(--spacing-sm)',
-                    letterSpacing: 'var(--letter-spacing-tight)'
+                    fontWeight: typography.titleWeight,
+                    letterSpacing: '-0.45px',
+                    lineHeight: '1.3',
+                    color: '#171717',
                 }}
             >
                 {title}
             </h3>
 
+            {/* Content - Inter for readability */}
             <p
-                className={`text-slate-500 leading-relaxed flex-grow ${typography.lineClamp}`}
-                style={{ fontSize: typography.content }}
+                className={`font-sans text-[#737373] leading-relaxed flex-grow ${typography.lineClamp}`}
+                style={{
+                    fontSize: typography.content,
+                }}
             >
                 {content}
             </p>
 
+            {/* Footer */}
             <div
-                className="border-t border-slate-50 flex justify-between items-center"
-                style={{ marginTop: 'var(--spacing-lg)', paddingTop: 'var(--spacing-md)' }}
+                className="border-t border-[#E5E5E5] flex justify-between items-center pt-3 mt-4"
             >
-                <span className="text-slate-400 typography-caption">
+                <span
+                    className="font-mono text-xs text-[#737373]"
+                    style={{ textTransform: 'lowercase' }}
+                >
                     {date}
                 </span>
                 <span
-                    className="text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity typography-caption"
-                    style={{ fontWeight: 'var(--font-weight-bold)' }}
+                    className="font-mono text-xs font-medium text-[#A3684D] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ textTransform: 'lowercase' }}
                 >
-                    EDIT →
+                    view →
                 </span>
             </div>
         </div>

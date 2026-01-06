@@ -144,7 +144,6 @@ function SidebarDesktop({
   collapsible,
   className,
   children,
-  ...props
 }: SidebarProps) {
   const { open } = useSidebar();
 
@@ -162,7 +161,6 @@ function SidebarDesktop({
       animate={{
         width: collapsible === "icon" && !open ? "4rem" : "16rem",
       }}
-      {...props}
     >
       {children}
     </motion.aside>
@@ -329,6 +327,7 @@ export function SidebarMenuButton({
   badge,
   className,
   children,
+  href,
   ...props
 }: SidebarMenuButtonProps) {
   const { open, isMobile } = useSidebar();
@@ -336,16 +335,18 @@ export function SidebarMenuButton({
 
   return (
     <Link
+      href={href}
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2.5",
-        "text-sm font-medium text-slate-700",
+        "text-sm font-medium text-slate-700 font-mono",
         "transition-all duration-200",
-        "hover:bg-rose-50/50 hover:text-rose-600",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2",
+        "hover:bg-[#A3684D]/5 hover:text-[#A3684D]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A3684D] focus-visible:ring-offset-2",
         isActive &&
-        "bg-rose-50 text-rose-600 shadow-sm",
+        "bg-[#A3684D]/10 text-[#A3684D] shadow-sm",
         className
       )}
+      style={{ textTransform: 'lowercase' }}
       {...props}
     >
       {icon && (

@@ -105,20 +105,20 @@ const Dashboard = () => {
     return (
         <MainLayout>
             <div
-                className="min-h-screen font-sans text-slate-900 noise-bg"
+                className="min-h-screen font-sans text-slate-900"
                 style={{
                     padding: 'var(--spacing-2xl) var(--spacing-xl)',
-                    background: 'linear-gradient(to bottom, #FAFAFA 0%, #F5F5F7 100%)'
+                    background: '#F9FAFB'
                 }}
             >
                 {/* Header */}
                 <header className="max-w-[1400px] mx-auto" style={{ marginBottom: 'calc(var(--spacing-2xl) + var(--spacing-md))' }}>
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center" style={{ gap: 'var(--spacing-xl)', marginBottom: 'var(--spacing-2xl)' }}>
                         <div>
-                            <h1 className="text-slate-900 typography-display" style={{ marginBottom: 'var(--spacing-xs)' }}>
-                                My Notes
+                            <h1 className="font-mono text-5xl font-bold text-[#171717]" style={{ letterSpacing: '-0.025em', lineHeight: '1.1', marginBottom: 'var(--spacing-xs)' }}>
+                                my notes
                             </h1>
-                            <p className="text-slate-500 typography-body-lg" style={{ fontWeight: 'var(--font-weight-medium)' }}>
+                            <p className="font-mono text-sm text-[#737373]" style={{ textTransform: 'lowercase' }}>
                                 {filteredNotes.length} {filteredNotes.length === 1 ? 'note' : 'notes'} in your collection
                             </p>
                         </div>
@@ -128,31 +128,33 @@ const Dashboard = () => {
                                 <Search size={18} className="absolute text-slate-400 group-focus-within:text-slate-600 transition-colors" style={{ left: 'var(--spacing-lg)' }} />
                                 <input
                                     type="text"
-                                    placeholder="Search your notes..."
-                                    className="w-full bg-white/80 backdrop-blur-sm border border-slate-200/60 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-purple-300 focus:ring-4 focus:ring-purple-50 focus:bg-white transition-all"
+                                    placeholder="search notes..."
+                                    className="w-full bg-white border border-[#E5E5E5] text-[#171717] placeholder:text-[#737373] focus:outline-none focus:border-[#A3684D] focus:ring-2 focus:ring-[#A3684D]/20 transition-all font-mono text-sm"
                                     style={{
-                                        borderRadius: 'var(--radius-xl)',
-                                        padding: 'calc(var(--spacing-md) - 2px) var(--spacing-lg) calc(var(--spacing-md) - 2px) 3.25rem',
-                                        fontSize: 'var(--font-size-base)',
-                                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
+                                        borderRadius: '12px',
+                                        padding: '11px var(--spacing-lg) 11px 3.25rem',
+                                        boxShadow: 'var(--shadow-xs)',
+                                        textTransform: 'lowercase'
                                     }}
                                 />
                             </div>
 
                             <Link href="/note/new">
                                 <button
-                                    className="bg-gradient-to-b from-slate-900 to-slate-800 text-white flex items-center hover:from-slate-800 hover:to-slate-700 active:scale-[0.98] transition-all group"
+                                    className="bg-[#A3684D] hover:bg-[#8B5840] text-white flex items-center active:scale-[0.98] transition-all group font-mono text-sm"
                                     style={{
-                                        padding: 'calc(var(--spacing-md) - 2px) var(--spacing-xl)',
-                                        borderRadius: 'var(--radius-xl)',
-                                        fontWeight: 'var(--font-weight-semibold)',
-                                        fontSize: 'var(--font-size-base)',
+                                        padding: '11px 32px',
+                                        borderRadius: '9999px',
+                                        fontWeight: '500',
                                         gap: 'var(--spacing-sm)',
-                                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                        boxShadow: 'var(--shadow-sm)',
+                                        textTransform: 'lowercase',
+                                        transitionDuration: '300ms',
+                                        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
                                     }}
                                 >
-                                    <Plus size={20} className="group-hover:rotate-90 transition-transform duration-300" />
-                                    <span className="hidden sm:inline">New Note</span>
+                                    <Plus size={18} className="group-hover:rotate-90 transition-transform duration-300" />
+                                    <span className="hidden sm:inline">new note</span>
                                 </button>
                             </Link>
                         </div>
@@ -160,12 +162,12 @@ const Dashboard = () => {
 
                     {/* Filters and View Toggle - Glassmorphic */}
                     <div
-                        className="flex flex-col sm:flex-row justify-between items-start sm:items-center backdrop-blur-md bg-white/60 border border-white/20 shadow-sm"
+                        className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white border border-[#E5E5E5]"
                         style={{
                             padding: 'var(--spacing-lg)',
-                            borderRadius: 'calc(var(--radius-xl) + 4px)',
+                            borderRadius: '20px',
                             gap: 'var(--spacing-md)',
-                            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6)'
+                            boxShadow: 'var(--shadow-xs)'
                         }}
                     >
                         <div className="flex items-center flex-wrap" style={{ gap: 'var(--spacing-sm)' }}>
@@ -173,25 +175,27 @@ const Dashboard = () => {
                                 <button
                                     key={filter}
                                     onClick={() => setActiveFilter(filter as any)}
-                                    className={`transition-all ${activeFilter === filter
-                                        ? 'bg-gradient-to-b from-slate-900 to-slate-800 text-white shadow-md'
-                                        : 'bg-slate-50/80 text-slate-600 hover:bg-white hover:shadow-sm'
+                                    className={`transition-all font-mono ${activeFilter === filter
+                                        ? 'bg-[#A3684D] text-white shadow-sm'
+                                        : 'bg-transparent text-[#737373] hover:bg-[#F9FAFB]'
                                         }`}
                                     style={{
-                                        padding: 'var(--spacing-sm) var(--spacing-lg)',
-                                        borderRadius: 'var(--radius-lg)',
-                                        fontSize: 'var(--font-size-sm)',
-                                        fontWeight: 'var(--font-weight-semibold)',
-                                        textTransform: 'capitalize',
-                                        border: activeFilter === filter ? 'none' : '1px solid rgba(0, 0, 0, 0.04)'
+                                        padding: '8px 16px',
+                                        borderRadius: '9999px',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        textTransform: 'lowercase',
+                                        border: activeFilter === filter ? 'none' : '1px solid #E5E5E5',
+                                        transitionDuration: '300ms',
+                                        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
                                     }}
                                 >
-                                    {filter === 'all' ? 'All Notes' : filter}
+                                    {filter === 'all' ? 'all notes' : filter}
                                 </button>
                             ))}
                         </div>
 
-                        <div className="flex items-center bg-slate-100/60 backdrop-blur-sm" style={{ borderRadius: 'var(--radius-lg)', padding: '3px', border: '1px solid rgba(0, 0, 0, 0.04)' }}>
+                        <div className="flex items-center bg-[#F9FAFB] border border-[#E5E5E5]" style={{ borderRadius: '12px', padding: '3px' }}>
                             <button
                                 onClick={() => setViewMode('grid')}
                                 className={`flex items-center justify-center transition-all ${viewMode === 'grid' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
@@ -225,14 +229,14 @@ const Dashboard = () => {
                     {/* Pinned Notes */}
                     {pinnedNotes.length > 0 && (
                         <div style={{ marginBottom: 'calc(var(--spacing-2xl) + var(--spacing-lg))' }}>
-                            <div className="flex items-center text-slate-600" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-xl)' }}>
-                                <div className="flex items-center justify-center bg-amber-50 text-amber-600" style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-md)' }}>
+                            <div className="flex items-center text-[#737373]" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-xl)' }}>
+                                <div className="flex items-center justify-center bg-[#A3684D]/10 text-[#A3684D]" style={{ width: '28px', height: '28px', borderRadius: '8px' }}>
                                     <Star size={16} className="fill-current" />
                                 </div>
-                                <h2 className="typography-label" style={{ color: '#64748b' }}>
-                                    Pinned
+                                <h2 className="font-mono text-xs font-medium" style={{ textTransform: 'lowercase', letterSpacing: '0.025em' }}>
+                                    pinned
                                 </h2>
-                                <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent" style={{ marginLeft: 'var(--spacing-md)' }} />
+                                <div className="flex-1 h-px bg-gradient-to-r from-[#E5E5E5] to-transparent" style={{ marginLeft: 'var(--spacing-md)' }} />
                             </div>
                             <div
                                 className={viewMode === 'grid' ? 'grid grid-cols-6 md:grid-cols-12 auto-rows-[200px]' : 'flex flex-col'}
@@ -264,14 +268,14 @@ const Dashboard = () => {
                     {/* Regular Notes */}
                     {regularNotes.length > 0 && (
                         <div>
-                            <div className="flex items-center text-slate-600" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-xl)' }}>
-                                <div className="flex items-center justify-center bg-slate-100 text-slate-600" style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-md)' }}>
+                            <div className="flex items-center text-[#737373]" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-xl)' }}>
+                                <div className="flex items-center justify-center bg-[#F9FAFB] text-[#737373]" style={{ width: '28px', height: '28px', borderRadius: '8px' }}>
                                     <Folder size={16} />
                                 </div>
-                                <h2 className="typography-label" style={{ color: '#64748b' }}>
-                                    All Notes
+                                <h2 className="font-mono text-xs font-medium" style={{ textTransform: 'lowercase', letterSpacing: '0.025em' }}>
+                                    all notes
                                 </h2>
-                                <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent" style={{ marginLeft: 'var(--spacing-md)' }} />
+                                <div className="flex-1 h-px bg-gradient-to-r from-[#E5E5E5] to-transparent" style={{ marginLeft: 'var(--spacing-md)' }} />
                             </div>
                             <div
                                 className={viewMode === 'grid' ? 'grid grid-cols-6 md:grid-cols-12 auto-rows-[200px]' : 'flex flex-col'}

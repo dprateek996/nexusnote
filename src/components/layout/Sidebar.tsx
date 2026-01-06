@@ -125,7 +125,7 @@ function Logo() {
     >
       <div className="relative flex-shrink-0">
         <div
-          className="bg-gradient-to-br from-rose-500 to-rose-600 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:shadow-rose-200"
+          className="bg-gradient-to-br from-[#A3684D] to[#8B5840] shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:shadow-[#A3684D]/20"
           style={{
             height: "2rem",
             width: "2rem",
@@ -139,9 +139,10 @@ function Logo() {
           opacity: shouldShowText ? 1 : 0,
           width: shouldShowText ? "auto" : 0,
         }}
-        className="overflow-hidden whitespace-nowrap text-lg font-semibold text-slate-900"
+        className="overflow-hidden whitespace-nowrap text-base font-semibold text-slate-900 font-mono"
+        style={{ letterSpacing: '-0.025em' }}
       >
-        NexusNote
+        nexusnote
       </motion.span>
     </Link>
   );
@@ -154,7 +155,7 @@ function UserProfile() {
   return (
     <div className="flex items-center gap-3 rounded-lg p-2 hover:bg-slate-50 transition-colors">
       <div
-        className="flex-shrink-0 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 border-2 border-white shadow-sm"
+        className="flex-shrink-0 rounded-full bg-gradient-to-br from-[#A3684D] to-[#8B5840] border-2 border-white shadow-sm"
         style={{ height: "2rem", width: "2rem" }}
       />
       <motion.div
@@ -164,10 +165,10 @@ function UserProfile() {
         }}
         className="flex-1 overflow-hidden"
       >
-        <div className="text-sm font-medium text-slate-900 truncate">
-          Prateek Dwivedi
+        <div className="text-sm font-medium text-slate-900 truncate font-mono" style={{ letterSpacing: '-0.025em' }}>
+          prateek dwivedi
         </div>
-        <div className="text-xs text-slate-500 truncate">
+        <div className="text-xs text-slate-500 truncate font-mono" style={{ textTransform: 'lowercase' }}>
           prateek@nexusnote.com
         </div>
       </motion.div>
